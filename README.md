@@ -34,3 +34,10 @@ const word = "hello";
 const text = "hello there";
 boldPassage(word, text);
 Expected Output: <p><strong>hello</strong> there</p>
+
+Test: "When string is submited prints count of all occurance of word"
+Code:
+const word = "";
+const text = "red RED Red!";
+numberOfOccurrencesInUserInputPassage(word, text)
+Expected Output: "string": N

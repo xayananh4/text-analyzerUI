@@ -26,15 +26,50 @@ function numberOfOccurrencesInText(word, text) {
   if (isEmpty(word)) {
     return 0;
   }
-
   const textArray = text.split(" ");
   let wordCount = 0;
+  
   textArray.forEach(function(element) {
     if (element.toLowerCase().includes(word.toLowerCase())) {
       wordCount++;
     }
   });
   return wordCount;
+}
+
+function numberOfOccurrencesInUserInputPassage(word, text) { 
+  if (isEmpty(text)) {
+    return 0;
+  }
+  let p = document.createElement('p')
+  
+  //apple world the big world
+  const textArray = text.split(" ").sort();
+
+
+let newArr = [];
+
+  
+
+  
+  for(let i = 0; i < textArray.length; i++) {     
+    let counter = 0;
+
+    for(let j = 0; j < textArray.length; j++) {
+      if(textArray[i] === textArray[j]) {
+        counter++;       
+      }
+    }
+
+    if (!newArr.includes(textArray[i])) {
+      p.append(textArray[i] + ": " + counter);
+      p.append(document.createElement("br"));
+    }
+
+  }
+
+  return p;
+  
 }
 
 //FUNCTION 
@@ -69,8 +104,8 @@ function handleFormSubmission(event) {
   const word = document.getElementById("word").value;
   const wordCount = wordCounter(passage);
   const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
-
-
+  const wordFrequency = numberOfOccurrencesInUserInputPassage(word, passage);
+  console.log(wordFrequency)
   document.getElementById("total-count").innerText = wordCount;
   document.getElementById("selected-count").innerText = occurrencesOfWord;
   // new lines here!
@@ -80,6 +115,8 @@ function handleFormSubmission(event) {
   } else {
     document.querySelector("div#bolded-passage").innerText = null;
   }
+
+  document.querySelector("div#wordUsage").append(wordFrequency);
 }
 
 window.addEventListener("load", function() {
